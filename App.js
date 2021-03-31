@@ -1,21 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React , {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
+import AuthSreen from "./src/screens/AuthScreen"
+
 
 export default function App() {
+  
+  const [auth,setAuth] = useState (undefined);
+    
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <PaperProvider style={"backgroundColor:'#8c3e34'"}>
+      {auth ? <Text>Zona De usuarios</Text> : <AuthSreen></AuthSreen>}
+    </PaperProvider>
+  ); 
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const styles = StyleSheet.create({});
+ 
