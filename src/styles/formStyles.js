@@ -11,7 +11,8 @@ const formStyles = StyleSheet.create({
     },
 
     input:{
-        marginBottom:20
+        marginBottom:20,
+        
     },
 
     btnSuccess: {

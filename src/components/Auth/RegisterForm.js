@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
-import { View } from 'react-native'
-import { TextInput, Button } from 'react-native-paper'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import Toast from 'react-native-root-toast'
-import {registerApi} from '../../api/user'
-import { formStyle } from "../../styles"
+import React, { useState } from 'react';
+import { Alert, View } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import Toast from 'react-native-root-toast';
+import { registerApi } from '../../api/user';
+import { formStyle } from "../../styles";
 export default function RegisterForm(props) {
 
     const { changeForm } = props;
@@ -20,9 +20,13 @@ export default function RegisterForm(props) {
                 changeForm();
             } catch (e) {
                 setLoading(false);
-                Toast.show("Error al registrar el Usuario",{
-                    position: Toast.positions.CENTER,
+                Alert.alert("Error Fumeta", "Error al Registrar Usuario Intente Nuevamente", [
+                    { text: 'Buenos Humos' }
+                ])
+                Toast.show("Error Al Registrar Revisa Tus Datos", {
+                    position: Toast.positions.CENTER
                 })
+                setLoading(true);
             }
         }
     })
@@ -32,14 +36,14 @@ export default function RegisterForm(props) {
             <TextInput
                 label='Email'
                 style={formStyle.input}
-                onChangeText={(text)=>{formik.setFieldValue('email',text)}}
+                onChangeText={(text) => { formik.setFieldValue('email', text) }}
                 value={formik.values.email}
                 error={formik.errors.email}
             />
             <TextInput
                 label='Nombre De Usuario'
                 style={formStyle.input}
-                onChangeText={(text)=>{formik.setFieldValue('username',text)}}
+                onChangeText={(text) => { formik.setFieldValue('username', text) }}
                 value={formik.values.username}
                 error={formik.errors.username}
             />
@@ -48,7 +52,7 @@ export default function RegisterForm(props) {
                 label='Contrase;a'
                 style={formStyle.input}
                 secureTextEntry
-                onChangeText={(text)=>{formik.setFieldValue('password',text)}}
+                onChangeText={(text) => { formik.setFieldValue('password', text) }}
                 value={formik.values.password}
                 error={formik.errors.password}
             />
@@ -56,7 +60,7 @@ export default function RegisterForm(props) {
                 label='Repetir Contrasena'
                 style={formStyle.input}
                 secureTextEntry
-                onChangeText={(text)=>{formik.setFieldValue('repeatPassword',text)}}
+                onChangeText={(text) => { formik.setFieldValue('repeatPassword', text) }}
                 value={formik.values.repeatPassword}
                 error={formik.errors.repeatPassword}
             />
@@ -82,15 +86,15 @@ function initialValues() {
     }
 }
 
-function validationSchema(){
+function validationSchema() {
 
-    return{
+    return {
         email: Yup.string().email(true).required(true),
         username: Yup.string().required(true),
         password: Yup.string().required(true),
         repeatPassword: Yup.string()
-                            .required(true)
-                            .oneOf([Yup.ref("password")],true),
+            .required(true)
+            .oneOf([Yup.ref("password")], true),
     }
 
 }
