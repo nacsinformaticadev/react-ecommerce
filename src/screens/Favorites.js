@@ -1,10 +1,10 @@
 import React from 'react'
-import {StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 
 export default function Favorites() {
     return (
         <View style={styles.container}>
-            <Text>Estamos en Favorites</Text>
+            <Text>Favoritos</Text>
         </View>
     )
 }
@@ -12,9 +12,9 @@ export default function Favorites() {
 
 const styles = StyleSheet.create({
 
-    container:{
+    container: {
         flex: 1,
-        justifyContent:'center',
+        justifyContent: 'center',
         alignItems: 'center',
     }
 })

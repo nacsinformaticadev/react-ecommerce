@@ -4,10 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import colors from '../styles/colors'
+import AccountStack from './AccountStack'
+
 import Home from '../screens/Home';
 import Favorites from '../screens/Favorites'
 import Cart from '../screens/Cart'
-import Account from '../screens/Account'
+import Account from '../screens/Account/Account'
 
 
 
@@ -48,7 +50,7 @@ export default function AppNavigation() {
                 />
                 <Tab.Screen
                     name='account'
-                    component={Account}
+                    component={AccountStack}
                     options={{
                         title: 'Mi Cuenta'
                     }}
@@ -88,7 +90,7 @@ const styles = StyleSheet.create({
 
     navigation: {
 
-        backgroundColor: colors.bgCafe
+        backgroundColor: colors.tele_cafeObs
     },
     icon: {
         fontSize: 20,
