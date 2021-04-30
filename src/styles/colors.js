@@ -3,6 +3,7 @@ const colors = {
     primary: "#b2d23e",
     secundary: "#8c3e34",
     dark: "#000",
+    danger:"#EE3718",
     //fontsize
     fontLight: "#fff",
     //Background color

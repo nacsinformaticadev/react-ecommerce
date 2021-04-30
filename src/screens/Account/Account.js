@@ -4,6 +4,8 @@ import { useFocusEffect } from '@react-navigation/native'
 import StatusBar from '../../components/StatusBarCustom'
 import Search from "../../components/Search"
 import ScreenLoading from "../../components/ScreenLoading"
+import UserInfo from '../../components/Account/UserInfo'
+import Menu from '../../components/Account/Menu'
 import { getMeApi } from '../../api/user'
 import useAuth from '../../hooks/useAuth'
 import colors from '../../styles/colors'
@@ -19,11 +21,9 @@ export default function Account() {
     useFocusEffect(
         useCallback(() => {
             (async () => {
-
                 const response = await getMeApi(auth.token);
                 setUser(response);
-
-            })()
+            })();
         }, [])
     );
 
@@ -39,10 +39,12 @@ export default function Account() {
                 <>
                     <Search />
                     <ScrollView>
-                        <Text>Estamos en Account</Text>
+                        <UserInfo user={user}/>
+                        <Menu/>
                     </ScrollView>
                 </>
             )}
+            
         </>
 
     )

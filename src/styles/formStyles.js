@@ -18,6 +18,7 @@ const formStyles = StyleSheet.create({
     btnSuccess: {
         padding: 5,
         backgroundColor: colors.primary,
+        
     },
     
     btnText:{

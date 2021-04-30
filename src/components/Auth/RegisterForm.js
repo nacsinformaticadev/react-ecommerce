@@ -49,7 +49,7 @@ export default function RegisterForm(props) {
             />
 
             <TextInput
-                label='Contrase;a'
+                label='Contraseña'
                 style={formStyle.input}
                 secureTextEntry
                 onChangeText={(text) => { formik.setFieldValue('password', text) }}
@@ -57,7 +57,7 @@ export default function RegisterForm(props) {
                 error={formik.errors.password}
             />
             <TextInput
-                label='Repetir Contrasena'
+                label='Repetir Contraseña'
                 style={formStyle.input}
                 secureTextEntry
                 onChangeText={(text) => { formik.setFieldValue('repeatPassword', text) }}
