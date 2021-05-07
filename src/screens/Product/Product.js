@@ -45,8 +45,6 @@ export default function Product(props) {
                         <Quantity quantity={quantity} setQuantity={setQuantity} />
                         <Buy product={product} quantity={quantity} />
                         <Favorite product={product} />
-
-
                     </View>
                 </ScrollView>
             )}

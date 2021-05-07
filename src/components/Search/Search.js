@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Keyboard, Animated } from 'react-native'
 import { Searchbar } from 'react-native-paper'
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import {
     AnimatedIcon,
     inputAnimationWidth,
@@ -11,16 +11,18 @@ import {
     arrowAnimation
 }
     from '../Search/SearchAnimation'
-import {updateSearchHistoryApi } from '../../api/search'
+import { updateSearchHistoryApi } from '../../api/search'
 import SearchHistoy from './SearchHistoy'
 import colors from '../../styles/colors'
 
-export default function Search() {
+export default function Search(props) {
+    const { currentSearch } = props;
 
-    const [searchQuery, setSearchQuery] = useState('')
+    const [searchQuery, setSearchQuery] = useState(currentSearch || "")
     const [showHistory, setShowHistory] = useState(false)
     const [containerHeight, setContainerHeight] = useState(0)
     const navigation = useNavigation();
+    const route = useRoute();
 
     const onChangeSearch = (query) => setSearchQuery(query);
 
@@ -36,14 +38,26 @@ export default function Search() {
         setShowHistory(!showHistory);
     }
 
-    const onSearch = async () => {
+    const onSearch = async (reuseSearch) => {
+
+        const isReuse = typeof reuseSearch === 'string'
+
         closeSearch();
 
-        await updateSearchHistoryApi(searchQuery);
+        !isReuse && (await updateSearchHistoryApi(searchQuery));
 
-        navigation.push('search', {
-            search: searchQuery
-        })
+        if (route.name === 'search') {
+            
+            navigation.push('search', {
+                search: isReuse ? reuseSearch : searchQuery
+            })
+        }else{
+            navigation.navigate('search', {
+                search: isReuse ? reuseSearch : searchQuery
+            })
+        }
+
+
     }
 
     return (
@@ -65,7 +79,7 @@ export default function Search() {
                 </Animated.View>
 
             </View>
-            <SearchHistoy showHistory={showHistory} containerHeight={containerHeight} />
+            <SearchHistoy showHistory={showHistory} containerHeight={containerHeight} onSearch={onSearch} />
         </View>
     )
 }
